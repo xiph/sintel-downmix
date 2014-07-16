@@ -11,4 +11,5 @@ all:
 
 1280-png/%.png: $(SRCDIR)/%.png
 	mkdir -p $(dir $@)
-	convert $< -sample 1280 $@
+	convert $< -alpha off -depth 16 -gamma 0.454545454545454545 \
+	  -scale 1280 -gamma 2.2 $@
