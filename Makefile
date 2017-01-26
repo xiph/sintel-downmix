@@ -5,8 +5,13 @@ PNG2Y4M := ~/daala/tools/unix/png2y4m
 
 PNGS := $(notdir $(wildcard $(SRCDIR)/*.png))
 
-all:
+all: sintel-4k.y4m sintel-1280.y4m
+
+list:
 	@echo $(PNGS)
+
+sintel-4k.y4m: $(SRCDIR)
+	$(PNG2Y4M) -o $@ $</%08d.png
 
 1280-png: $(addprefix 1280-png/,$(PNGS))
 
@@ -23,4 +28,7 @@ all:
 	convert $< -sample 1280 $@
 
 sintel-1280-nogamma.y4m: 1280-png-nogamma
+	$(PNG2Y4M) -o $@ $</%08d.png
+
+sintel-1280.y4m: 1280-png
 	$(PNG2Y4M) -o $@ $</%08d.png
